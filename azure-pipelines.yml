@@ -12,6 +12,13 @@ stages:
     pool:
       name: MyAgentPool
     steps:
+    - script: |
+        echo "Setting up Maven environment"
+        export MAVEN_HOME=/opt/maven
+        export PATH=$MAVEN_HOME/bin:$PATH
+        echo "Maven Home: $MAVEN_HOME"
+        echo "Path: $PATH"
+      displayName: 'Setup Maven Environment'
     - task: Maven@3
       displayName: 'Maven Package'
       inputs:
