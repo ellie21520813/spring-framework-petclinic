@@ -3,6 +3,7 @@ trigger:
 
 variables:
   rootFolder: $(System.DefaultWorkingDirectory)
+
 stages:
 - stage: Build
   displayName: Build stage
@@ -12,6 +13,22 @@ stages:
     pool:
       name: MyAgentPool
     steps:
+    - script: |
+        echo "Installing Maven"
+        wget https://archive.apache.org/dist/maven/maven-3/3.9.8/binaries/apache-maven-3.9.8-bin.tar.gz
+        sudo tar xf apache-maven-3.9.8-bin.tar.gz -C /opt
+        sudo ln -s /opt/apache-maven-3.9.8 /opt/maven
+        echo 'export MAVEN_HOME=/opt/maven' | sudo tee -a /etc/profile.d/maven.sh
+        echo 'export PATH=${MAVEN_HOME}/bin:${PATH}' | sudo tee -a /etc/profile.d/maven.sh
+        sudo chmod +x /etc/profile.d/maven.sh
+        source /etc/profile.d/maven.sh
+      displayName: 'Install Maven'
+
+    - script: |
+        echo "Checking Maven Installation"
+        mvn -version
+      displayName: 'Check Maven Installation'
+
     - task: Maven@3
       displayName: 'Maven Package'
       inputs:
