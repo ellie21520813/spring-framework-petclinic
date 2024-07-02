@@ -12,6 +12,11 @@ stages:
     pool:
       name: MyAgentPool
     steps:
+    - script: |
+        echo "##vso[task.setvariable variable=MAVEN_HOME]$(which mvn)"
+        echo "##vso[task.setvariable variable=PATH]$(MAVEN_HOME):$(PATH)"
+      displayName: 'Set Maven Path'
+
     - task: Maven@3
       displayName: 'Maven Package'
       inputs:
