@@ -12,15 +12,6 @@ stages:
     pool:
       name: MyAgentPool
     steps:
-    - script: |
-        MAVEN_VERSION=3.8.5
-        wget https://downloads.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz
-        tar -xzvf apache-maven-${MAVEN_VERSION}-bin.tar.gz
-        sudo mv apache-maven-${MAVEN_VERSION} /usr/local/apache-maven
-        sudo ln -s /usr/local/apache-maven/bin/mvn /usr/bin/mvn
-        mvn -version
-      workingDirectory: $(rootFolder)
-      displayName: 'install maven'
     - task: Maven@3
       displayName: 'Maven Package'
       inputs:
