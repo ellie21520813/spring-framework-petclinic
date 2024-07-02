@@ -12,6 +12,10 @@ stages:
     pool:
       name: MyAgentPool
     steps:
+    - script: |
+        echo "Checking Maven Installation"
+        mvn -version
+      displayName: 'Check Maven Installation'
     - task: Maven@3
       displayName: 'Maven Package'
       inputs:
