@@ -30,7 +30,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          echo "##vso[task.setvariable variable=JAVA_HOME]/usr/lib/jvm/default-java" && \
+          echo "##vso[task.setvariable variable=JAVA_HOME]/usr/lib/jvm/java-18-openjdk-amd64" && \
           echo "##vso[task.setvariable variable=M2_HOME]/usr/share/maven" && \
           echo "##vso[task.setvariable variable=MAVEN_HOME]/usr/share/maven" && \
           echo "##vso[task.setvariable variable=PATH]$PATH:/usr/share/maven/bin"
